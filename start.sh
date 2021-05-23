@@ -57,13 +57,16 @@ if [ -e "$USER_HOME/.bash_aliases" ] && [ ! -L "$USER_HOME/.bash_aliases" ]; the
   echo "Manual .bash_aliases removing..."
   mv "$USER_HOME/.bash_aliases" "$USER_HOME/.bash_aliases.old"
 fi
-
 if [ ! -e "$USER_HOME/.bash_aliases" ]; then
   echo -e "Deploy alias"
   ln -s $USER_HOME/.deploy-user/bash_aliases $USER_HOME/.bash_aliases
   chown $USER_NAME:$USER_NAME $USER_HOME/.bash_aliases
 fi
 
+if [ -e "$USER_HOME/.bashrc" ] && [ ! -L "$USER_HOME/.bashrc" ]; then
+  echo "Manual .bashrc removing..."
+  mv "$USER_HOME/.bashrc" "$USER_HOME/.bashrc.old"
+fi
 if [ ! -e "$USER_HOME/.bashrc" ]; then
   echo -e "Deploy bashrc"
   ln -s $USER_HOME/.deploy-user/bashrc $USER_HOME/.bashrc

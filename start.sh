@@ -50,8 +50,13 @@ fi
 
 # Deploy config.
 echo -e "Get all config/script..."
-git clone -q --recurse-submodules -j8 https://github.com/Theosakamg/deploy-user.git $USER_HOME/.deploy-user >/dev/null
-chown -R $USER_NAME:$USER_NAME $USER_HOME/.deploy-user
+if [ ! -d $USER_HOME/.deploy-user ]; then
+  git clone -q --recurse-submodules -j8 https://github.com/Theosakamg/deploy-user.git $USER_HOME/.deploy-user >/dev/null
+  chown -R $USER_NAME:$USER_NAME $USER_HOME/.deploy-user
+else 
+  cd $USER_HOME/.deploy-user
+  git pull
+fi
 
 if [ -e "$USER_HOME/.bash_aliases" ] && [ ! -L "$USER_HOME/.bash_aliases" ]; then
   echo "Manual .bash_aliases removing..."

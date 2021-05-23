@@ -1,0 +1,7 @@
+TOOLS="bazel dkms git-prompt maven fail2ban"
+
+for TOOL in $TOOLS; do
+  if [ -f "/etc/bash_completion.d/$TOOL" ]; then
+    . /etc/bash_completion.d/$TOOL
+  fi
+done
